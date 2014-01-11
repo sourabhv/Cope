@@ -63,3 +63,26 @@ class BookCopy(models.Model):
 
 	def __unicode__(self):
 		return '%s | %s' % (self.book_category.title, self.bookCopyNumber)
+
+class EndUser(models.Model):
+	'''
+	Part of accessing register enlisting EndUser details.
+	Inherited by Student and Employee Models.
+
+	Contains common user specific details - name, card_number, gender,
+	phone_number.
+	'''
+
+	genderChoices = (
+		(u'F', u'Female'),
+		(u'M', u'Male'),
+		(u'U', u'Unspecified'),
+	)
+
+	name = models.CharField(max_length=100)
+	cardNumber = models.CharField(max_length=100)
+	gender = models.CharField(max_length=1, choices=genderChoices)
+	phoneNumber = models.CharField(max_length=20)
+
+	def __unicode__(self):
+		return '%s | %s' % (self.name, self.cardNumber)
