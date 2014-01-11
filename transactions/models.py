@@ -86,3 +86,31 @@ class EndUser(models.Model):
 
 	def __unicode__(self):
 		return '%s | %s' % (self.name, self.cardNumber)
+
+class Student(EndUser):
+	'''
+	Student peculiar schema.
+	comprises of details kin to student and book issue details.
+	'''
+
+	rollNumber = models.CharField()
+	branch = models.CharField()
+	batch = models.CharField(max_length=4, default=datetime.now().year)
+	semester = models.CharField(max_length=1)
+
+	def __unicode__(self):
+		return '%s | %s' % (self.name, self.rollNumber)
+
+class Employee(EndUser):
+	'''
+	Employee or faculty peculiar schema.
+	comprises of details kin to employee and book issue details.
+	'''
+
+	employeeID = models.CharField(max_length=25)
+	joiningDate = models.DateField()
+	department = models.CharField(max_length=50)
+	designation = models.CharField(max_length=50)
+
+	def __unicode__(self):
+		return u'%s | %s' %(self.name, self.employeeID)
