@@ -45,3 +45,21 @@ class Book(models.Model):
 
 	def __unicode__(self):
 		return self.title
+
+class BookCopy(models.Model):
+	date = models.DateField(auto_now_add=True, verbose_name=u'cataloguing date')
+	bookCopyNumber = models.CharField(verbose_name=u'book copy number')
+	issued = models.BooleanField(default=False)
+	lastIssueDate = models.DateField(verbose_name=u'last issue date', null=True, blank=True)
+
+	# Foreign keys
+	book_category = models.ForeignKey(Book, related_name='copies')
+	issued_to = models.ForeignKey(EndUser, related_name='issued_books',
+		null=True, blank=True, default=None)
+
+	class Meta:
+		verbose_name=u'book copy'
+		verbose_name_plural=u'book copies'
+
+	def __unicode__(self):
+		return '%s | %s' % (self.book_category.title, self.bookCopyNumber)
