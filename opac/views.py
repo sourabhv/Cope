@@ -3,6 +3,6 @@ from django.core.urlresolvers import reverse
 
 def index(request):
 	if request.user.is_authenticated():
-		return HttpResponse('Hi! Authenticated User.')
+		return HttpResponseRedirect(reverse('transactions:index'))
 	else:
-		return HttpResponseRedirect(reverse('opac:index'))
+		return HttpResponse('Hi! Anonymous User.')

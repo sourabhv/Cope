@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Login</title>
+	<style>
+	#error {
+		margin: 100px 0 0;
+		font-family: sans-serif;
+		text-align: center;
+		font-size: 14px;
+	}
+	table {
+		margin: 0 auto;
+	}
+	td{
+		padding: 10px;
+		font-family: sans-serif;
+		font-size: 14px;
+	}
+	input[type="text"], input[type="password"] {
+		border: 2px solid #999;
+		border-radius: 3px;
+		width: 200px;
+		padding: 5px;
+		font-family: sans-serif;
+	}
+	input[type="submit"] {
+		background: #999;
+		border: none;
+		color: white;
+		padding: 10px 20px;
+		border-radius: 3px;
+	}
+	</style>
+</head>
+<body>
+	{% if form.errors %}
+	<div id="error">
+		<p>Something went wrong!</p>
+		<p>Please Check your Username and password. Note that both fields are case-sensitive.</p>
+	</div>
+	{% endif %}
+
+	<form method="post" action="{% url 'login' %}">
+		{% csrf_token %}
+		<table>
+			<tbody>
+				<tr>
+					<td>{{ form.username.label_tag }}</td>
+					<td>{{ form.username }}</td>
+				</tr>
+				<tr>
+					<td>{{ form.password.label_tag }}</td>
+					<td>{{ form.password }}</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="Login"></td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</body>
+</html>
